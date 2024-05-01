@@ -1,8 +1,8 @@
-import matplotlib.pyplot as plt
-import numpy as np
+import tkinter as tk
+from tkinter import ttk
+from point import Point
+from app import App
 
-def phi1(θ : float)->float:
-    return (θ-1) * (2 * θ + 1)
-
-def phi2(x : float)->float:
-    return 
+if __name__ == "__main__":
+    app = App()
+    app.run()
