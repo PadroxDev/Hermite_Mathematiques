@@ -27,14 +27,11 @@ slopes = [
     [3, -0.1]
 ]
 
-xLim = (0, 10)
-yLim = (0, 10)
-
 centerPoint = [5, 5]
 
 precision = 50
 
-intervalLength = 10  
+intervalLength = 30
 
 def PolynomeHermite(x1, x2, x1p, x2p, theta, interpolateAbscissas):
     phi1 = (theta - 1)**2 * (2 * theta + 1)
@@ -115,4 +112,4 @@ def DrawPlot(points, slopes, precision, drawPoints, drawSlopes, drawCenteredRepl
     ax.legend()
     plt.show()
 
-DrawPlot(points, slopes, precision, True, True, True, centerPoint, intervalLength, True)
+DrawPlot(points, slopes, precision, True, False, False, centerPoint, intervalLength, True)
