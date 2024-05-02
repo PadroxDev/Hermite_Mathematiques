@@ -3,6 +3,12 @@ from tkinter import ttk
 
 from constants import *
 
+import matplotlib.pyplot as plt
+
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from hermite import DrawPlot
+
+
 class App(tk.Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -10,6 +16,8 @@ class App(tk.Tk):
         self.height = DEFAULT_HEIGHT
         
         self.initWindow()
+
+        self.fig, self.ax = DrawPlot(points, slopes, precision, True, False, False, centerPoint, intervalLength, True)
 
     def initWindow(self):
         ws = self.winfo_screenwidth() # width of the screen
@@ -45,6 +53,16 @@ class App(tk.Tk):
             bd=0, highlightthickness=0)
         self.renderCanvas.pack(side="right", fill="y")
         self.renderCanvas.pack_propagate(0)
+        
+        self.fig.set_facecolor("none")
+        self.ax.set_facecolor("none")
+        pltCanvas = FigureCanvasTkAgg(self.fig, master=self.renderCanvas)
+        self.pltWidget = pltCanvas.get_tk_widget()
+
+        figW, figH = self.fig.get_size_inches()
+        ratio = figW / figH
+        self.pltWidget.configure(bg=C_MAIN, width=(1920-SIDEBAR_WIDTH)*0.8, height=(1920-SIDEBAR_WIDTH) * ratio*0.8)
+        self.pltWidget.pack()
 
         self.versionLabel = tk.Label(self.renderCanvas, text='Version {}'.format(CURRENT_VERSION), fg=C_TEXT, bg=C_MAIN,
             font=F_CALIBRI)

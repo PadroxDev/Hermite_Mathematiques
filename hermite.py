@@ -110,6 +110,6 @@ def DrawPlot(points, slopes, precision, drawPoints, drawSlopes, drawCenteredRepl
     
     ax.set_title('Plot Drawer')
     ax.legend()
-    plt.show()
+    return (fig, ax)
 
 DrawPlot(points, slopes, precision, True, False, False, centerPoint, intervalLength, True)
